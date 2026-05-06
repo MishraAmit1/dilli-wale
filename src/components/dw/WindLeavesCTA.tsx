@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import SplitText from "./SplitText";
 
 const leafImages = [
   "https://raw.githubusercontent.com/Nik439/Images/master/cpc-wind/leaf_1.svg",
@@ -163,12 +164,35 @@ export default function WindLeavesCTA() {
         <div className="relative z-10 mx-auto max-w-4xl text-center pointer-events-none">
           {/* Heading */}
           <h2 className="font-display text-4xl font-bold text-dw-orange md:text-5xl lg:text-6xl">
-            EXPERIENCE THE
+            <SplitText
+              text="EXPERIENCE THE"
+              delay={0.1}
+              stagger={0.04}
+              duration={0.6}
+              from={{ opacity: 0, y: 25 }}
+              to={{ opacity: 1, y: 0 }}
+            />
             <br />
-            <span className="text-dw-dark">MAGIC OF DILLI</span>
+            <span className="text-dw-dark">
+              <SplitText
+                text="MAGIC OF DILLI"
+                delay={0.25}
+                stagger={0.04}
+                duration={0.6}
+                from={{ opacity: 0, y: 25 }}
+                to={{ opacity: 1, y: 0 }}
+              />
+            </span>
           </h2>
           <p className="mt-4 font-display text-2xl text-dw-teal md:text-3xl">
-            दिल्ली की जादू
+            <SplitText
+              text="दिल्ली की जादू"
+              delay={0.4}
+              stagger={0.05}
+              duration={0.5}
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </p>
 
           {/* CTA Button */}
@@ -196,7 +220,14 @@ export default function WindLeavesCTA() {
 
           {/* Subtext */}
           <p className="mt-8 font-body text-base text-dw-dark/70 md:text-lg">
-            Move your cursor through the falling leaves
+            <SplitText
+              text="Move your cursor through the falling leaves"
+              delay={0.6}
+              stagger={0.01}
+              duration={0.4}
+              from={{ opacity: 0, y: 10 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </p>
         </div>
       </div>

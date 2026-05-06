@@ -1,4 +1,5 @@
 import ScallopWave from "./ScallopWave";
+import SplitText from "./SplitText";
 
 const navLinks = [
   { label: "HOME", href: "#" },
@@ -38,22 +39,62 @@ export default function Footer() {
               {/* Heading */}
               <div className="mb-8">
                 <h2 className="font-display text-3xl font-bold leading-tight text-dw-cream md:text-4xl lg:text-5xl">
-                  OUR RESTAURANT
+                  <SplitText
+                    text="OUR RESTAURANT"
+                    delay={0.1}
+                    stagger={0.03}
+                    duration={0.6}
+                    from={{ opacity: 0, y: 20 }}
+                    to={{ opacity: 1, y: 0 }}
+                    rootMargin="-50px"
+                  />
                   <br />
-                  LOCATION
+                  <SplitText
+                    text="LOCATION"
+                    delay={0.2}
+                    stagger={0.04}
+                    duration={0.6}
+                    from={{ opacity: 0, y: 20 }}
+                    to={{ opacity: 1, y: 0 }}
+                    rootMargin="-50px"
+                  />
                 </h2>
                 <p className="mt-2 font-display text-xl text-dw-yellow md:text-2xl">
-                  हमारा पता
+                  <SplitText
+                    text="हमारा पता"
+                    delay={0.3}
+                    stagger={0.05}
+                    duration={0.5}
+                    from={{ opacity: 0, y: 15 }}
+                    to={{ opacity: 1, y: 0 }}
+                    rootMargin="-50px"
+                  />
                 </p>
               </div>
 
               {/* Single Location */}
               <div className="mb-8">
                 <h3 className="mb-2 font-body text-xs font-bold tracking-wider text-dw-yellow">
-                  NEWCASTLE
+                  <SplitText
+                    text="NEWCASTLE"
+                    delay={0.1}
+                    stagger={0.03}
+                    duration={0.4}
+                    from={{ opacity: 0, y: 10 }}
+                    to={{ opacity: 1, y: 0 }}
+                    rootMargin="-50px"
+                  />
                 </h3>
                 <p className="font-body text-sm text-dw-cream/80">
-                  123 Chilli Lane, NE1 1AA
+                  <SplitText
+                    text="123 Chilli Lane, NE1 1AA"
+                    delay={0.2}
+                    stagger={0.01}
+                    duration={0.3}
+                    from={{ opacity: 0, y: 10 }}
+                    to={{ opacity: 1, y: 0 }}
+                    rootMargin="-50px"
+                  />
                 </p>
               </div>
 

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import SplitText from "./SplitText";
 
 const reels = [
   { src: "/videos/reel1.mp4", dish: "Chaat Papri", emoji: "🥘" },
-  { src: "/videos/reel2.mp4", dish: "Chicken Biryani", emoji: "🍗" },
+  { src: "/videos/reel2.mp4", dish: "Veg Biryani", emoji: "�" },
   { src: "/videos/reel3.mp4", dish: "Dahi Bhalla", emoji: "🥣" },
-  { src: "/videos/reel4.mp4", dish: "Seekh Kebab", emoji: "🍢" },
+  { src: "/videos/reel4.mp4", dish: "Veg Seekh Kebab", emoji: "🍢" },
   { src: "/videos/reel5.mp4", dish: "Kulfi Falooda", emoji: "🍨" },
 ];
 
@@ -58,11 +59,25 @@ export default function ReelsSection() {
       <div className="px-6 pt-16 pb-8 md:px-12 md:pt-[60px] md:pb-8">
         <div className="flex flex-col items-center text-center">
           <h2 className="font-display text-3xl font-bold text-dw-orange md:text-[3rem]">
-            FOOD FROM THE CAPITAL
+            <SplitText
+              text="FOOD FROM THE CAPITAL"
+              delay={0.1}
+              stagger={0.03}
+              duration={0.6}
+              from={{ opacity: 0, y: 25 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </h2>
-          <div className="my-3 h-[2px] w-20 bg-dw-yellow" />
+          <div className="my-3 h-[2px] w-20 bg-dw-yellow opacity-0 animate-[fadeIn_0.4s_ease_0.5s_forwards]" />
           <p className="font-display text-2xl text-dw-teal md:text-[2rem]">
-            राजधानी से भोजन
+            <SplitText
+              text="राजधानी से भोजन"
+              delay={0.4}
+              stagger={0.05}
+              duration={0.5}
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </p>
         </div>
       </div>

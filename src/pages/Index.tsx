@@ -9,7 +9,7 @@ import WindLeavesCTA from "@/components/dw/WindLeavesCTA";
 import Footer from "@/components/dw/Footer";
 
 const Index = () => (
-  <main className="min-h-screen bg-dw-cream font-body text-dw-dark">
+  <main className="min-h-screen bg-dw-cream font-body text-dw-dark animate-content-fade">
     <Navbar />
     <HeroSection />
     <MarqueeTicker />

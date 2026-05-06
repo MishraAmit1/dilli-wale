@@ -1,5 +1,6 @@
 import PillButton from "./PillButton";
 import StarButton from "./StarButton";
+import SplitText from "./SplitText";
 import { Paisley, StarMotif, Heart, Tassel, Diya } from "./Motifs";
 import rickshawImg from "@/assets/rickshaw.png";
 const HeroSection = () => (
@@ -16,21 +17,57 @@ const HeroSection = () => (
       {/* Text */}
       <div className="relative z-10 md:col-span-7">
         <h1 className="mt-6 font-display font-extrabold leading-[0.95]">
-          <span className="block text-[2.5rem] text-dw-dark sm:text-5xl md:text-[5rem]">STREET FOOD</span>
+          <span className="block text-[2.5rem] text-dw-dark sm:text-5xl md:text-[5rem]">
+            <SplitText
+              text="STREET FOOD"
+              delay={0.1}
+              stagger={0.04}
+              duration={0.6}
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              autoPlay={true}
+            />
+          </span>
           <span
             className="block text-[3.5rem] text-dw-orange sm:text-[5.5rem] md:text-[7rem]"
             style={{ textShadow: "4px 4px 0 #067E85" }}
           >
-            FROM DILLI
+            <SplitText
+              text="FROM DILLI"
+              delay={0.3}
+              stagger={0.05}
+              duration={0.6}
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              autoPlay={true}
+            />
           </span>
-          <span className="block text-[2rem] text-dw-teal sm:text-4xl md:text-[4rem]">TO YOUR DOOR</span>
+          <span className="block text-[2rem] text-dw-teal sm:text-4xl md:text-[4rem]">
+            <SplitText
+              text="TO YOUR DOOR"
+              delay={0.5}
+              stagger={0.04}
+              duration={0.6}
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              autoPlay={true}
+            />
+          </span>
         </h1>
 
-        <p className="mt-6 max-w-md font-body text-base text-dw-dark/80 md:text-lg">
-          Hot chaat, smoky kebabs, and creamy lassi — packed with Purani Dilli soul and sent straight to your doorstep.
-        </p>
+        <div className="mt-6 max-w-md font-body text-base text-dw-dark/80 md:text-lg">
+          <SplitText
+            text="Hot chaat, tandoori kebabs, and creamy lassi — packed with Purani Dilli soul and sent straight to your doorstep."
+            delay={0.7}
+            stagger={0.01}
+            duration={0.4}
+            from={{ opacity: 0, y: 10 }}
+            to={{ opacity: 1, y: 0 }}
+            autoPlay={true}
+          />
+        </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-5">
+        <div className="mt-8 flex flex-wrap items-center gap-5 opacity-0 animate-[fadeIn_0.5s_ease_1.5s_forwards]">
           <PillButton label="Order Now →" />
           <StarButton label="View Menu" />
         </div>

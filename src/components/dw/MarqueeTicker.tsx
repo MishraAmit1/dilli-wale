@@ -1,6 +1,6 @@
 const dishes = [
-  "CHAAT", "BIRYANI", "KEBAB", "DAHI BHALLA", "LASSI",
-  "KULFI", "CHOLE BHATURE", "BUTTER CHICKEN", "PANI PURI", "JALEBI",
+  "CHAAT", "VEG BIRYANI", "VEG KEBAB", "DAHI BHALLA", "LASSI",
+  "KULFI", "CHOLE BHATURE", "PANEER MAKHANI", "PANI PURI", "JALEBI",
 ];
 
 const MarqueeTicker = () => (

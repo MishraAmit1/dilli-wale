@@ -1,3 +1,4 @@
+import SplitText from "./SplitText";
 import { StarMotif, Paisley } from "./Motifs";
 
 const dishes = [
@@ -7,8 +8,8 @@ const dishes = [
     image: "https://media.base44.com/images/public/69f995e1e263076ab3e8c6f8/18d16d30d_generated_ebb727b2.png",
   },
   {
-    name: "Butter Chicken",
-    desc: "Rich, creamy tomato gravy with tender chicken. Old Delhi's finest export.",
+    name: "Paneer Makhani",
+    desc: "Rich, creamy tomato gravy with soft paneer cubes. Old Delhi's finest export.",
     image: "https://media.base44.com/images/public/69f995e1e263076ab3e8c6f8/cf7f71a9d_generated_538819e6.png",
   },
   {
@@ -32,7 +33,14 @@ function FoodCard({ dish }: { dish: typeof dishes[0] }) {
 
       {/* Dish Name */}
       <h3 className="font-display font-extrabold text-dw-dark text-center text-2xl md:text-3xl">
-        {dish.name}
+        <SplitText
+          text={dish.name}
+          delay={0.1}
+          stagger={0.03}
+          duration={0.5}
+          from={{ opacity: 0, y: 15 }}
+          to={{ opacity: 1, y: 0 }}
+        />
       </h3>
     </div>
   );
@@ -49,9 +57,25 @@ export default function FoodSection() {
         {/* Section Heading */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-4xl font-extrabold text-dw-orange md:text-6xl">
-            KHANA JO YAAD RAHE
+            <SplitText
+              text="KHANA JO YAAD RAHE"
+              delay={0.1}
+              stagger={0.03}
+              duration={0.6}
+              from={{ opacity: 0, y: 25 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </h2>
-          <p className="mt-3 font-body text-lg italic text-dw-teal md:text-xl">— Food You'll Remember —</p>
+          <p className="mt-3 font-body text-lg italic text-dw-teal md:text-xl">
+            <SplitText
+              text="— Food You'll Remember —"
+              delay={0.3}
+              stagger={0.02}
+              duration={0.5}
+              from={{ opacity: 0, y: 15 }}
+              to={{ opacity: 1, y: 0 }}
+            />
+          </p>
         </div>
 
         {/* Food Grid */}
