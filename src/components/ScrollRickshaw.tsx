@@ -26,22 +26,31 @@ export default function ScrollRickshaw() {
 
     // Wait for DOM to be fully ready
     setTimeout(() => {
-      // Find the sections
-      const pinkSection = document.querySelector('section.bg-\\[\\#c40878\\]') as HTMLElement
-      const blueSection = document.querySelector('section.bg-\\[\\#5BC8E8\\]') as HTMLElement
+      // Find the sections with better selectors
+      const pinkSection = document.querySelector('section[class*="bg-[#c40878]"], section.bg-\\[\\#c40878\\]') as HTMLElement
+      const blueSection = document.querySelector('section[class*="bg-[#5BC8E8]"], section.bg-\\[\\#5BC8E8\\]') as HTMLElement
 
       if (!pinkSection || !blueSection) {
-        console.warn('Sections not found')
+        console.warn('Sections not found - retrying...', { pinkSection, blueSection })
+        // Retry once after a longer delay
+        setTimeout(() => {
+          ScrollTrigger.refresh()
+        }, 1000)
         return
       }
+
+      // Refresh ScrollTrigger to ensure mobile viewport is calculated correctly
+      ScrollTrigger.refresh()
+
+      console.log('Sections found:', { pinkSection, blueSection, isMobile })
 
       // 1. Initial setup - start at hero position
       gsap.set(el, {
         left: '50vw',
-        top: isMobile ? '75vh' : '72vh',
+        top: isMobile ? '70vh' : '72vh', // Adjusted for mobile viewport
         xPercent: -50,
         yPercent: -50,
-        scale: 1,
+        scale: isMobile ? 1.1 : 1, // Bigger on mobile
         rotation: 0,
         opacity: 0 // Hidden initially
       })
@@ -51,24 +60,31 @@ export default function ScrollRickshaw() {
         opacity: 1,
         scrollTrigger: {
           trigger: document.body,
-          start: '10px top',
+          start: isMobile ? '5px top' : '10px top', // Earlier start on mobile
           end: '+=50',
-          scrub: 0.5,
-          immediateRender: false
+          scrub: isMobile ? 0.3 : 0.5, // Faster response on mobile
+          immediateRender: false,
+          onToggle: (self) => {
+            console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Animation ${self.isActive ? 'activated' : 'deactivated'}`)
+          }
         }
       })
 
       // 3. FIRST MOVEMENT: Direct path to LEFT side of pink section
       gsap.to(el, {
-        left: isMobile ? '25vw' : '20vw', // Left side
+        left: isMobile ? '30vw' : '20vw', // Less extreme left position on mobile
         top: '50vh', // Center of viewport
+        scale: isMobile ? 1.0 : 1, // Bigger on mobile during movement
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: pinkSection,
           start: 'top bottom', // Start when pink section appears at bottom
           end: 'top center',   // End when pink section is at center
-          scrub: 1.5,          // Smooth movement
-          immediateRender: false
+          scrub: isMobile ? 1 : 1.5, // Faster on mobile
+          immediateRender: false,
+          onToggle: (self) => {
+            console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Pink section animation ${self.isActive ? 'activated' : 'deactivated'}`)
+          }
         }
       })
 
@@ -80,6 +96,10 @@ export default function ScrollRickshaw() {
       ScrollTrigger.create({
         trigger: blueSection,
         start: 'top bottom-=10%',  // Just before blue section enters view
+        onEnter: () => {
+          // Instantly rotate 180 degrees (no animation)
+          // gsap.set(el, { rotation: 180 });
+        }
       });
 
       // Then create a scrolltrigger to move to center of blue and stick
@@ -94,8 +114,8 @@ export default function ScrollRickshaw() {
             // Calculate position based on scroll progress
             const progress = self.progress;
 
-            // Starting position (left of pink section)
-            const startX = isMobile ? 25 : 20;
+            // Starting position (left of pink section) - mobile adjusted
+            const startX = isMobile ? 30 : 20;
             const startY = 50;
 
             // Ending position (center of blue section)
@@ -106,20 +126,57 @@ export default function ScrollRickshaw() {
             const currX = startX + (endX - startX) * progress;
             const currY = startY + (endY - startY) * progress;
 
-            // Apply position
+            // Apply position with mobile-specific scale
             gsap.set(el, {
               left: `${currX}vw`,
               top: `${currY}vh`,
+              scale: isMobile ? 0.9 + (0.2 * progress) : 1, // Bigger on mobile during movement
             });
+
+            // Log progress on mobile for debugging
+            if (isMobile && Math.floor(progress * 10) % 2 === 0) {
+              console.log(`ScrollRickshaw: Mobile - Blue section progress: ${progress.toFixed(2)}, Position: (${currX.toFixed(1)}vw, ${currY.toFixed(1)}vh)`);
+            }
 
             // If we've reached the end, mark the flag
             if (progress >= 0.99 && self.direction === 1) {
               blueReached = true;
+              console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Blue section reached and stuck`);
             }
           }
         },
-        scrub: true
+        scrub: isMobile ? 0.8 : true, // Faster response on mobile
+        onToggle: (self) => {
+          console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Blue section animation ${self.isActive ? 'activated' : 'deactivated'}`)
+        }
       });
+
+      // Add mobile-specific viewport refresh
+      if (isMobile) {
+        const handleOrientationChange = () => {
+          setTimeout(() => {
+            ScrollTrigger.refresh()
+          }, 500)
+        }
+
+        window.addEventListener('orientationchange', handleOrientationChange)
+
+        // Also refresh on resize for mobile
+        const handleMobileResize = () => {
+          setTimeout(() => {
+            ScrollTrigger.refresh()
+          }, 300)
+        }
+
+        window.addEventListener('resize', handleMobileResize)
+
+        // Cleanup
+        return () => {
+          ScrollTrigger.getAll().forEach(t => t.kill())
+          window.removeEventListener('orientationchange', handleOrientationChange)
+          window.removeEventListener('resize', handleMobileResize)
+        }
+      }
 
     }, 500)
 
@@ -128,8 +185,8 @@ export default function ScrollRickshaw() {
     }
   }, [isReady, isMobile])
 
-  // Responsive logo size
-  const imgSize = isMobile ? '150px' : '280px'
+  // Responsive logo size - adjusted for mobile
+  const imgSize = isMobile ? '190px' : '280px'
 
   return (
     <img
@@ -144,7 +201,8 @@ export default function ScrollRickshaw() {
         height: 'auto',
         pointerEvents: 'none',
         zIndex: 50,
-        opacity: 0
+        opacity: 0,
+        filter: isMobile ? 'brightness(1.3) contrast(0.9)' : 'none' // Make lighter on mobile
       }}
     />
   )

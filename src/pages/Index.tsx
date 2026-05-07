@@ -4,6 +4,8 @@ import HeroSection from "@/components/dw-new/HeroSection";
 import PinkMandalaSection from "@/components/dw-new/PinkMandalaSection";
 import SkyBlueSection from "@/components/dw-new/SkyBlueSection";
 import Footer from "@/components/dw-new/Footer";
+import BestSellerGridSection from "@/components/dw-new/BestSellerGridSection";
+import AmbienceGallerySection from "@/components/dw-new/AmbienceGallerySection";
 // import MarqueeTicker from "@/components/dw-new/MarqueeTicker";
 // import FoodSection from "@/components/dw-new/FoodSection";
 // import ReelsSection from "@/components/dw-new/ReelsSection";
@@ -17,7 +19,10 @@ const Index = () => (
     <Navbar />
     <HeroSection />
     <PinkMandalaSection />
+
     <SkyBlueSection />
+    <BestSellerGridSection />
+    <AmbienceGallerySection />
     <Footer />
     {/* new sections will go here */}
   </main>
