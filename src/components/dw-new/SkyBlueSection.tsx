@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import WaveDivider from '@/components/dw/WaveDivider';
 
 const SkyBlueSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -179,52 +180,60 @@ const SkyBlueSection = () => {
   );
 
   return (
-    <section className="relative w-full min-h-[55vh] md:min-h-[70vh] overflow-hidden bg-[#5BC8E8]">
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-[0]"
+    <>
+      <section className="relative w-full min-h-[55vh] md:min-h-[70vh] overflow-hidden bg-[#5BC8E8]">
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full z-[0]"
+        />
+
+        <div className="absolute inset-0 bg-[#5BC8E8] opacity-[0.75] z-[1]" />
+
+        {/* Gold Mandala Left */}
+        <svg
+          className="
+            absolute top-1/2 -translate-y-1/2 z-[2]
+            left-[-25px] md:left-[-20px]
+            w-[90px] sm:w-[110px] md:w-[150px] lg:w-[180px]
+            opacity-80 md:opacity-90
+          "
+          viewBox="0 0 180 360"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <MandalaContent gradId="goldGradL" />
+        </svg>
+
+        {/* Gold Mandala Right */}
+        <svg
+          className="
+            absolute top-1/2 -translate-y-1/2 scale-x-[-1] z-[2]
+            right-[-25px] md:right-[-20px]
+            w-[90px] sm:w-[110px] md:w-[150px] lg:w-[180px]
+            opacity-80 md:opacity-90
+          "
+          viewBox="0 0 180 360"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <MandalaContent gradId="goldGradR" />
+        </svg>
+
+        {/* Content */}
+        <div className="
+          relative z-[4] min-h-[55vh] md:min-h-[70vh]
+          px-4 sm:px-6 md:px-8 lg:px-12
+          py-[70px] md:py-[90px]
+          flex items-center justify-center
+        ">
+          <div className="sky-content w-full max-w-7xl mx-auto" />
+        </div>
+      </section>
+
+      {/* Bottom Wave */}
+      <WaveDivider
+        topColor="#5BC8E8"
+        bottomColor="#FFC300"
       />
-
-      <div className="absolute inset-0 bg-[#5BC8E8] opacity-[0.75] z-[1]" />
-
-      {/* Gold Mandala Left */}
-      <svg
-        className="
-          absolute top-1/2 -translate-y-1/2 z-[2]
-          left-[-25px] md:left-[-20px]
-          w-[90px] sm:w-[110px] md:w-[150px] lg:w-[180px]
-          opacity-80 md:opacity-90
-        "
-        viewBox="0 0 180 360"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <MandalaContent gradId="goldGradL" />
-      </svg>
-
-      {/* Gold Mandala Right */}
-      <svg
-        className="
-          absolute top-1/2 -translate-y-1/2 scale-x-[-1] z-[2]
-          right-[-25px] md:right-[-20px]
-          w-[90px] sm:w-[110px] md:w-[150px] lg:w-[180px]
-          opacity-80 md:opacity-90
-        "
-        viewBox="0 0 180 360"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <MandalaContent gradId="goldGradR" />
-      </svg>
-
-      {/* Content */}
-      <div className="
-        relative z-[4] min-h-[55vh] md:min-h-[70vh]
-        px-4 sm:px-6 md:px-8 lg:px-12
-        py-[70px] md:py-[90px]
-        flex items-center justify-center
-      ">
-        <div className="sky-content w-full max-w-7xl mx-auto" />
-      </div>
-    </section>
+    </>
   );
 };
 

@@ -24,35 +24,44 @@ export default function ScrollRickshaw() {
 
     const el = logoRef.current
 
-    // Wait for DOM to be fully ready
     setTimeout(() => {
-      // Find the sections with better selectors
       const pinkSection = document.querySelector('section[class*="bg-[#c40878]"], section.bg-\\[\\#c40878\\]') as HTMLElement
       const blueSection = document.querySelector('section[class*="bg-[#5BC8E8]"], section.bg-\\[\\#5BC8E8\\]') as HTMLElement
+      const ambienceSection = document.querySelector('section[class*="bg-[#FFC300"]') as HTMLElement
+
+      // Footer ko multiple ways se dhoondte hain
+      const footer = document.querySelector('footer') ||
+        document.querySelector('[class*="footer"]') ||
+        document.querySelector('.footer') as HTMLElement
 
       if (!pinkSection || !blueSection) {
         console.warn('Sections not found - retrying...', { pinkSection, blueSection })
-        // Retry once after a longer delay
         setTimeout(() => {
           ScrollTrigger.refresh()
         }, 1000)
         return
       }
 
-      // Refresh ScrollTrigger to ensure mobile viewport is calculated correctly
       ScrollTrigger.refresh()
 
-      console.log('Sections found:', { pinkSection, blueSection, isMobile })
+      console.log('All sections found:', {
+        pinkSection,
+        blueSection,
+        ambienceSection,
+        footer,
+        footerFound: !!footer,
+        isMobile
+      })
 
       // 1. Initial setup - start at hero position
       gsap.set(el, {
         left: '50vw',
-        top: isMobile ? '70vh' : '72vh', // Adjusted for mobile viewport
+        top: isMobile ? '70vh' : '72vh',
         xPercent: -50,
         yPercent: -50,
-        scale: isMobile ? 1.1 : 1, // Bigger on mobile
+        scale: isMobile ? 0.9 : 1,
         rotation: 0,
-        opacity: 0 // Hidden initially
+        opacity: 0
       })
 
       // 2. Show when scroll starts
@@ -60,98 +69,119 @@ export default function ScrollRickshaw() {
         opacity: 1,
         scrollTrigger: {
           trigger: document.body,
-          start: isMobile ? '5px top' : '10px top', // Earlier start on mobile
+          start: isMobile ? '5px top' : '10px top',
           end: '+=50',
-          scrub: isMobile ? 0.3 : 0.5, // Faster response on mobile
+          scrub: isMobile ? 0.3 : 0.5,
           immediateRender: false,
-          onToggle: (self) => {
-            console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Animation ${self.isActive ? 'activated' : 'deactivated'}`)
-          }
         }
       })
 
       // 3. FIRST MOVEMENT: Direct path to LEFT side of pink section
       gsap.to(el, {
-        left: isMobile ? '30vw' : '20vw', // Less extreme left position on mobile
-        top: '50vh', // Center of viewport
-        scale: isMobile ? 1.0 : 1, // Bigger on mobile during movement
+        left: isMobile ? '30vw' : '20vw',
+        top: '50vh',
+        scale: isMobile ? 0.8 : 1,
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: pinkSection,
-          start: 'top bottom', // Start when pink section appears at bottom
-          end: 'top center',   // End when pink section is at center
-          scrub: isMobile ? 1 : 1.5, // Faster on mobile
+          start: 'top bottom',
+          end: 'top center',
+          scrub: isMobile ? 1 : 1.5,
           immediateRender: false,
-          onToggle: (self) => {
-            console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Pink section animation ${self.isActive ? 'activated' : 'deactivated'}`)
-          }
         }
       })
 
-      // 4. FINAL MOVEMENT: To center of blue section with instant rotation
-      //    and then STICK there
-      let blueReached = false; // Flag to track if blue section has been reached
-
-      // First, set up the instant rotation when blue section comes into view
-      ScrollTrigger.create({
-        trigger: blueSection,
-        start: 'top bottom-=10%',  // Just before blue section enters view
-        onEnter: () => {
-          // Instantly rotate 180 degrees (no animation)
-          // gsap.set(el, { rotation: 180 });
+      // 4. SECOND MOVEMENT: Pink left to Blue RIGHT (80vw)
+      gsap.to(el, {
+        left: isMobile ? '70vw' : '80vw',
+        top: '50vh',
+        scale: isMobile ? 0.8 : 1,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: blueSection,
+          start: 'top bottom',
+          end: 'center center',
+          scrub: isMobile ? 0.8 : 1,
+          immediateRender: false,
         }
-      });
+      })
 
-      // Then create a scrolltrigger to move to center of blue and stick
-      const blueTrigger = ScrollTrigger.create({
-        trigger: blueSection,
-        start: 'top bottom',      // Start when blue section appears
-        end: 'center center',     // End when blue center is at viewport center
-        onUpdate: (self) => {
-          // Only proceed if we haven't already reached the blue section center
-          // or if we're scrolling back up from below
-          if (!blueReached || self.direction === -1) {
-            // Calculate position based on scroll progress
-            const progress = self.progress;
+      // 5. THIRD MOVEMENT: Blue right to BigJharokha CENTER (inside dome arch)
+      if (ambienceSection) {
+        gsap.to(el, {
+          left: isMobile ? '30vw' : '28vw',
+          top: isMobile ? '42vh' : '45vh',
+          scale: isMobile ? 0.8 : 1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: ambienceSection,
+            start: 'top bottom',
+            end: 'top center',
+            scrub: isMobile ? 0.8 : 1,
+            immediateRender: false,
+            onEnter: () => console.log('Ambience section entered'),
+            onLeave: () => console.log('Ambience section left'),
+          }
+        })
+      }
 
-            // Starting position (left of pink section) - mobile adjusted
-            const startX = isMobile ? 30 : 20;
-            const startY = 50;
-
-            // Ending position (center of blue section)
-            const endX = 50;
-            const endY = 50;
-
-            // Calculate current position
-            const currX = startX + (endX - startX) * progress;
-            const currY = startY + (endY - startY) * progress;
-
-            // Apply position with mobile-specific scale
-            gsap.set(el, {
-              left: `${currX}vw`,
-              top: `${currY}vh`,
-              scale: isMobile ? 0.9 + (0.2 * progress) : 1, // Bigger on mobile during movement
-            });
-
-            // Log progress on mobile for debugging
-            if (isMobile && Math.floor(progress * 10) % 2 === 0) {
-              console.log(`ScrollRickshaw: Mobile - Blue section progress: ${progress.toFixed(2)}, Position: (${currX.toFixed(1)}vw, ${currY.toFixed(1)}vh)`);
-            }
-
-            // If we've reached the end, mark the flag
-            if (progress >= 0.99 && self.direction === 1) {
-              blueReached = true;
-              console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Blue section reached and stuck`);
+      // 6. FOURTH MOVEMENT: Gallery to Footer LEFT (with shrinking)
+      // Footer trigger ko ambienceSection ke end se start karte hain
+      if (ambienceSection) {
+        gsap.to(el, {
+          left: isMobile ? '18vw' : '12vw',
+          top: isMobile ? '88vh' : '85vh',
+          scale: isMobile ? 0.45 : 0.55,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: ambienceSection,
+            start: 'bottom center', // Ambience section ke bottom se start
+            end: 'bottom top', // Jab ambience pura upar chala jaye
+            scrub: isMobile ? 0.8 : 1,
+            immediateRender: false,
+            onEnter: () => console.log('Moving to footer position'),
+            onUpdate: (self) => {
+              console.log('Footer animation progress:', self.progress)
             }
           }
-        },
-        scrub: isMobile ? 0.8 : true, // Faster response on mobile
-        onToggle: (self) => {
-          console.log(`ScrollRickshaw: ${isMobile ? 'Mobile' : 'Desktop'} - Blue section animation ${self.isActive ? 'activated' : 'deactivated'}`)
-        }
-      });
+        })
+      }
 
-      // Add mobile-specific viewport refresh
+      // Alternative: Agar footer mil gaya ho to usse bhi trigger kar sakte hain
+      if (footer) {
+        gsap.to(el, {
+          left: isMobile ? '18vw' : '12vw',
+          top: isMobile ? '88vh' : '85vh',
+          scale: isMobile ? 0.45 : 0.55,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top 80%', // Footer jab 80% visible ho
+            end: 'top 50%',
+            scrub: isMobile ? 0.8 : 1,
+            immediateRender: false,
+            onEnter: () => console.log('Footer trigger activated'),
+          }
+        })
+
+        // Final pin at footer
+        ScrollTrigger.create({
+          trigger: footer,
+          start: 'top 50%',
+          end: 'bottom bottom',
+          onUpdate: (self) => {
+            if (self.progress >= 0.5) {
+              gsap.set(el, {
+                left: isMobile ? '18vw' : '12vw',
+                top: isMobile ? '88vh' : '85vh',
+                scale: isMobile ? 0.45 : 0.55,
+              })
+            }
+          },
+          scrub: true,
+        })
+      }
+
       if (isMobile) {
         const handleOrientationChange = () => {
           setTimeout(() => {
@@ -161,7 +191,6 @@ export default function ScrollRickshaw() {
 
         window.addEventListener('orientationchange', handleOrientationChange)
 
-        // Also refresh on resize for mobile
         const handleMobileResize = () => {
           setTimeout(() => {
             ScrollTrigger.refresh()
@@ -170,7 +199,6 @@ export default function ScrollRickshaw() {
 
         window.addEventListener('resize', handleMobileResize)
 
-        // Cleanup
         return () => {
           ScrollTrigger.getAll().forEach(t => t.kill())
           window.removeEventListener('orientationchange', handleOrientationChange)
@@ -185,8 +213,7 @@ export default function ScrollRickshaw() {
     }
   }, [isReady, isMobile])
 
-  // Responsive logo size - adjusted for mobile
-  const imgSize = isMobile ? '190px' : '280px'
+  const imgSize = isMobile ? '170px' : '280px'
 
   return (
     <img
@@ -202,7 +229,7 @@ export default function ScrollRickshaw() {
         pointerEvents: 'none',
         zIndex: 50,
         opacity: 0,
-        filter: isMobile ? 'brightness(1.3) contrast(0.9)' : 'none' // Make lighter on mobile
+        filter: isMobile ? 'brightness(1.5) contrast(0.8)' : 'none'
       }}
     />
   )

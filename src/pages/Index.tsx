@@ -21,7 +21,7 @@ const Index = () => (
     <PinkMandalaSection />
 
     <SkyBlueSection />
-    <BestSellerGridSection />
+    {/* <BestSellerGridSection /> */}
     <AmbienceGallerySection />
     <Footer />
     {/* new sections will go here */}
