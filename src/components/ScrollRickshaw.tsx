@@ -27,11 +27,11 @@ export default function ScrollRickshaw() {
     setTimeout(() => {
       const pinkSection = document.querySelector('section[class*="bg-[#c40878]"], section.bg-\\[\\#c40878\\]') as HTMLElement
       const blueSection = document.querySelector('section[class*="bg-[#5BC8E8]"], section.bg-\\[\\#5BC8E8\\]') as HTMLElement
-      const ambienceSection = document.querySelector('section[class*="bg-[#FFC300]"]') as HTMLElement
-      const footer = document.querySelector('footer') as HTMLElement
+      const ambienceSection = document.querySelector('section[class*="bg-[#FFC300"]') as HTMLElement
+      const footer = document.querySelector('footer') || document.querySelector('[class*="footer"]') as HTMLElement
 
       if (!pinkSection || !blueSection) {
-        console.warn('Sections not found - retrying...', { pinkSection, blueSection })
+        console.warn('Sections not found - retrying...')
         setTimeout(() => {
           ScrollTrigger.refresh()
         }, 1000)
@@ -40,9 +40,7 @@ export default function ScrollRickshaw() {
 
       ScrollTrigger.refresh()
 
-      console.log('Sections found:', { pinkSection, blueSection, ambienceSection, footer, isMobile })
-
-      // 1. Initial setup - start at hero position
+      // Initial setup
       gsap.set(el, {
         left: '50vw',
         top: isMobile ? '70vh' : '72vh',
@@ -53,99 +51,67 @@ export default function ScrollRickshaw() {
         opacity: 0
       })
 
-      // 2. Show when scroll starts
-      gsap.to(el, {
+      // Create a single smooth timeline
+      const tl = gsap.timeline()
+
+      // Add all movements to the timeline
+      tl.to(el, {
         opacity: 1,
-        scrollTrigger: {
-          trigger: document.body,
-          start: isMobile ? '5px top' : '10px top',
-          end: '+=50',
-          scrub: isMobile ? 0.3 : 0.5,
-          immediateRender: false,
-        }
+        duration: 0.5,
       })
+        .to(el, {
+          left: isMobile ? '30vw' : '20vw',
+          top: '50vh',
+          scale: isMobile ? 0.8 : 1,
+          duration: 2,
+          ease: "none", // Linear for smooth scrubbing
+        })
+        .to(el, {
+          left: isMobile ? '70vw' : '80vw',
+          top: '50vh',
+          scale: isMobile ? 0.8 : 1,
+          duration: 2,
+          ease: "none",
+        })
+        .to(el, {
+          left: isMobile ? '30vw' : '28vw',
+          top: isMobile ? '42vh' : '45vh',
+          scale: isMobile ? 0.8 : 1,
+          duration: 2,
+          ease: "none",
+        })
+        .to(el, {
+          left: isMobile ? '18vw' : '12vw',
+          top: isMobile ? '88vh' : '85vh',
+          scale: isMobile ? 0.45 : 0.55,
+          duration: 2,
+          ease: "none",
+        })
 
-      // 3. FIRST MOVEMENT: Direct path to LEFT side of pink section
-      gsap.to(el, {
-        left: isMobile ? '30vw' : '20vw',
-        top: '50vh',
-        scale: isMobile ? 0.8 : 1,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: pinkSection,
-          start: 'top bottom',
-          end: 'top center',
-          scrub: isMobile ? 1 : 1.5,
-          immediateRender: false,
-        }
-      })
+      // Single ScrollTrigger for the entire timeline
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5, // Single smooth scrub value
+        animation: tl,
+        onUpdate: (self) => {
+          // Progressive triggers based on scroll progress
+          const progress = self.progress
 
-      // 4. SECOND MOVEMENT: Pink left to Blue RIGHT (80vw)
-      gsap.to(el, {
-        left: isMobile ? '70vw' : '80vw', // Right side
-        top: '50vh',
-        scale: isMobile ? 0.8 : 1, // SAME SIZE as pink
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: blueSection,
-          start: 'top bottom',
-          end: 'center center',
-          scrub: isMobile ? 0.8 : 1,
-          immediateRender: false,
-        }
-      })
-
-      // 5. THIRD MOVEMENT: Blue right to BigJharokha CENTER (inside dome arch)
-      // BigJharokha is on LEFT side of grid, so targeting ~25-30vw (not too far left)
-      if (ambienceSection) {
-        gsap.to(el, {
-          left: isMobile ? '30vw' : '28vw', // Center of BigJharokha (left grid item)
-          top: isMobile ? '42vh' : '45vh', // Inside the arch/dome area
-          scale: isMobile ? 0.8 : 1, // SAME SIZE - NO shrinking
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: ambienceSection,
-            start: 'top bottom',
-            end: 'top center',
-            scrub: isMobile ? 0.8 : 1,
-            immediateRender: false,
+          if (progress < 0.05) {
+            // Initial fade in
+          } else if (progress < 0.3) {
+            // Moving to pink section
+          } else if (progress < 0.5) {
+            // Moving to blue section  
+          } else if (progress < 0.75) {
+            // Moving to gallery
+          } else {
+            // Moving to footer
           }
-        })
-      }
-
-      // 6. FOURTH MOVEMENT: Gallery to Footer LEFT (with shrinking)
-      if (footer) {
-        gsap.to(el, {
-          left: isMobile ? '18vw' : '12vw', // Footer logo position left
-          top: isMobile ? '88vh' : '85vh', // Footer area
-          scale: isMobile ? 0.45 : 0.55, // NOW shrink for footer
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            end: 'top center',
-            scrub: isMobile ? 0.8 : 1,
-            immediateRender: false,
-          }
-        })
-
-        // Pin at footer logo position
-        ScrollTrigger.create({
-          trigger: footer,
-          start: 'top center',
-          end: 'bottom bottom',
-          onUpdate: (self) => {
-            if (self.progress >= 0.99) {
-              gsap.set(el, {
-                left: isMobile ? '18vw' : '12vw',
-                top: isMobile ? '88vh' : '85vh',
-                scale: isMobile ? 0.45 : 0.55,
-              })
-            }
-          },
-          scrub: true,
-        })
-      }
+        }
+      })
 
       if (isMobile) {
         const handleOrientationChange = () => {
@@ -194,7 +160,7 @@ export default function ScrollRickshaw() {
         pointerEvents: 'none',
         zIndex: 50,
         opacity: 0,
-        filter: isMobile ? 'brightness(1.5) contrast(0.8)' : 'none'
+        willChange: 'transform, opacity',
       }}
     />
   )
