@@ -2,11 +2,11 @@ import ScallopWave from "./ScallopWave";
 import SplitText from "./SplitText";
 
 const navLinks = [
-  { label: "HOME", href: "#" },
-  { label: "ABOUT", href: "#story" },
-  { label: "MENUS", href: "#menu" },
-  { label: "LOCATIONS", href: "#locations" },
-  { label: "WHAT'S ON", href: "#events" },
+  { label: "", href: "#" },
+  { label: "", href: "#" },
+  { label: "", href: "#" },
+  { label: "", href: "#" },
+  { label: "", href: "#" },
 ];
 
 export default function Footer() {
@@ -34,99 +34,38 @@ export default function Footer() {
               />
             </div>
 
-            {/* Right - Heading, Single Location & Nav Links */}
+            {/* Right - Heading, Single Location & Nav Links - Placeholders */}
             <div className="flex flex-col justify-start">
-              {/* Heading */}
+              {/* Heading - Placeholder */}
               <div className="mb-8">
-                <h2 className="font-display text-3xl font-bold leading-tight text-dw-cream md:text-4xl lg:text-5xl">
-                  <SplitText
-                    text="OUR RESTAURANT"
-                    delay={0.1}
-                    stagger={0.03}
-                    duration={0.6}
-                    from={{ opacity: 0, y: 20 }}
-                    to={{ opacity: 1, y: 0 }}
-                    rootMargin="-50px"
-                  />
-                  <br />
-                  <SplitText
-                    text="LOCATION"
-                    delay={0.2}
-                    stagger={0.04}
-                    duration={0.6}
-                    from={{ opacity: 0, y: 20 }}
-                    to={{ opacity: 1, y: 0 }}
-                    rootMargin="-50px"
-                  />
-                </h2>
-                <p className="mt-2 font-display text-xl text-dw-yellow md:text-2xl">
-                  <SplitText
-                    text="हमारा पता"
-                    delay={0.3}
-                    stagger={0.05}
-                    duration={0.5}
-                    from={{ opacity: 0, y: 15 }}
-                    to={{ opacity: 1, y: 0 }}
-                    rootMargin="-50px"
-                  />
-                </p>
+                <div className="h-12 w-64 bg-gray-800 rounded mb-4"></div>
+                <div className="h-12 w-48 bg-gray-800 rounded"></div>
+                <div className="mt-2 h-8 w-32 bg-gray-700 rounded"></div>
               </div>
 
-              {/* Single Location */}
+              {/* Single Location - Placeholder */}
               <div className="mb-8">
-                <h3 className="mb-2 font-body text-xs font-bold tracking-wider text-dw-yellow">
-                  <SplitText
-                    text="NEWCASTLE"
-                    delay={0.1}
-                    stagger={0.03}
-                    duration={0.4}
-                    from={{ opacity: 0, y: 10 }}
-                    to={{ opacity: 1, y: 0 }}
-                    rootMargin="-50px"
-                  />
-                </h3>
-                <p className="font-body text-sm text-dw-cream/80">
-                  <SplitText
-                    text="123 Chilli Lane, NE1 1AA"
-                    delay={0.2}
-                    stagger={0.01}
-                    duration={0.3}
-                    from={{ opacity: 0, y: 10 }}
-                    to={{ opacity: 1, y: 0 }}
-                    rootMargin="-50px"
-                  />
-                </p>
+                <div className="h-6 w-32 bg-gray-700 rounded mb-2"></div>
+                <div className="h-6 w-48 bg-gray-600 rounded"></div>
               </div>
 
-              {/* Navigation Links */}
+              {/* Navigation Links - Placeholder */}
               <div className="border-t border-dw-cream/20 pt-6">
                 <div className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="font-body text-sm font-bold text-dw-cream/90 transition-colors hover:text-dw-cream"
-                    >
-                      {link.label}
-                    </a>
+                  {navLinks.map((link, index) => (
+                    <div key={index} className="h-6 w-20 bg-gray-600 rounded"></div>
                   ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Bar - Compact */}
+          {/* Bottom Bar - Compact - Placeholder */}
           <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-dw-cream/20 pt-6 md:flex-row">
-            <p className="font-body text-xs text-dw-cream/60">
-              © 2024 Dilli Delight. All rights reserved.
-            </p>
+            <div className="h-4 w-48 bg-gray-700 rounded"></div>
             <div className="flex gap-6">
-              <a href="#" className="font-body text-xs text-dw-cream/60 transition-colors hover:text-dw-cream">
-                Privacy
-              </a>
-              <a href="#" className="font-body text-xs text-dw-cream/60 transition-colors hover:text-dw-cream">
-                Terms
-              </a>
+              <div className="h-4 w-16 bg-gray-700 rounded"></div>
+              <div className="h-4 w-16 bg-gray-700 rounded"></div>
             </div>
           </div>
         </div>

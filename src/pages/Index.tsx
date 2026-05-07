@@ -1,24 +1,25 @@
+import ScrollRickshaw from "@/components/ScrollRickshaw";
 import Navbar from "@/components/dw/Navbar";
-import HeroSection from "@/components/dw/HeroSection";
-import MarqueeTicker from "@/components/dw/MarqueeTicker";
-import FoodSection from "@/components/dw/FoodSection";
-import ReelsSection from "@/components/dw/ReelsSection";
-import StoryStrip from "@/components/dw/StoryStrip";
-import CTASection from "@/components/dw/CTASection";
-import WindLeavesCTA from "@/components/dw/WindLeavesCTA";
-import Footer from "@/components/dw/Footer";
+import HeroSection from "@/components/dw-new/HeroSection";
+import PinkMandalaSection from "@/components/dw-new/PinkMandalaSection";
+import SkyBlueSection from "@/components/dw-new/SkyBlueSection";
+import Footer from "@/components/dw-new/Footer";
+// import MarqueeTicker from "@/components/dw-new/MarqueeTicker";
+// import FoodSection from "@/components/dw-new/FoodSection";
+// import ReelsSection from "@/components/dw-new/ReelsSection";
+// import StoryStrip from "@/components/dw-new/StoryStrip";
+// import WindLeavesCTA from "@/components/dw-new/WindLeavesCTA";
+// import Footer from "@/components/dw-new/Footer";
 
 const Index = () => (
   <main className="min-h-screen bg-dw-cream font-body text-dw-dark animate-content-fade">
+    <ScrollRickshaw />
     <Navbar />
     <HeroSection />
-    <MarqueeTicker />
-    <FoodSection />
-    <ReelsSection />
-    <StoryStrip />
-    {/* <CTASection /> */}
-    <WindLeavesCTA />
+    <PinkMandalaSection />
+    <SkyBlueSection />
     <Footer />
+    {/* new sections will go here */}
   </main>
 );
 

@@ -13,6 +13,8 @@ export function notifyLoaderFinished() {
   loaderCallbacks.forEach(cb => cb());
 }
 
+export { loaderFinished, loaderCallbacks };
+
 interface SplitTextProps {
   text: string;
   className?: string;

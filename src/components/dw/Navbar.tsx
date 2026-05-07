@@ -4,45 +4,39 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <>
       {/* Main Navbar */}
-      <nav className="absolute top-0 left-0 right-0 z-50 hero-pattern">
-        <div className="flex items-center justify-between px-6 py-5 md:px-12">
-          {/* Left: Logo */}
-          <a href="#" className="flex items-center gap-2 font-display text-2xl font-extrabold text-dw-dark md:text-3xl">
-            <span className="text-dw-orange">DILLI</span>
-            <span className="text-dw-teal">WALE</span>
+      <nav className="absolute top-0 left-0 right-0 z-[60]">
+        <div className="flex items-center justify-between px-6 py-5 md:px-12 relative z-10">
+          {/* Left: Logo - Placeholder */}
+          <a href="#" className="flex items-center gap-2">
+            <div className="h-8 w-32 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs font-bold">LOGO</div>
           </a>
-          {/* Center: Nav Links */}
-          <div className="hidden md:flex items-center gap-8 font-display font-bold text-dw-dark">
-            <a href="#menu" className="hover:text-dw-orange transition-colors">Home</a>
-            <a href="#story" className="hover:text-dw-orange transition-colors">About</a>
-            <a href="#contact" className="hover:text-dw-orange transition-colors">Menus</a>
-            <a href="#contact" className="hover:text-dw-orange transition-colors">Locations</a>
-            <a href="#contact" className="hover:text-dw-orange transition-colors">What's On</a>
+          {/* Center: Nav Links - Placeholder */}
+          <div className="hidden md:flex items-center gap-8">
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">HOME</div>
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">MENU</div>
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">ABOUT</div>
+            <div className="h-6 w-20 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">CONTACT</div>
+            <div className="h-6 w-24 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">SERVICES</div>
           </div>
 
-          {/* Right: CTA Button */}
+          {/* Right: CTA Button - Placeholder */}
           <div className="hidden md:block">
-            <button className="navbar-pill-btn">
-              <div className="navbar-pill-l1">
-                <div className="navbar-pill-l2">
-                  <div className="navbar-pill-l3">Book a Table</div>
-                </div>
-              </div>
-            </button>
+            <div className="h-10 w-32 bg-black bg-opacity-10 rounded-full text-amber-900 flex items-center justify-center text-sm font-bold">ORDER NOW</div>
           </div>
 
           {/* Mobile: Hamburger */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 focus:outline-none"
+            className="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 focus:outline-none relative z-10"
             aria-label="Open menu"
           >
-            <span className="w-6 h-[2.5px] bg-[#1A1A1A] rounded-sm" />
-            <span className="w-6 h-[2.5px] bg-[#1A1A1A] rounded-sm" />
-            <span className="w-6 h-[2.5px] bg-[#1A1A1A] rounded-sm" />
+            <span className="w-6 h-[2.5px] bg-black rounded-sm" />
+            <span className="w-6 h-[2.5px] bg-black rounded-sm" />
+            <span className="w-6 h-[2.5px] bg-black rounded-sm" />
           </button>
         </div>
       </nav>
@@ -74,36 +68,12 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Nav Links */}
+          {/* Nav Links - Placeholder */}
           <div className="flex-1 flex flex-col items-center justify-center gap-8">
-            <a
-              href="#menu"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-display font-bold text-[3rem] text-[#F7F3EA] border-b-2 border-[#FFC300] pb-2 hover:opacity-80 transition-opacity"
-            >
-              Menu
-            </a>
-            <a
-              href="#story"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-display font-bold text-[3rem] text-[#F7F3EA] border-b-2 border-[#FFC300] pb-2 hover:opacity-80 transition-opacity"
-            >
-              Story
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-display font-bold text-[3rem] text-[#F7F3EA] border-b-2 border-[#FFC300] pb-2 hover:opacity-80 transition-opacity"
-            >
-              Find Us
-            </a>
-            <a
-              href="#"
-              onClick={() => setIsMenuOpen(false)}
-              className="mt-4 font-display font-bold text-[3rem] text-[#F7F3EA] border-b-2 border-[#FFC300] pb-2 hover:opacity-80 transition-opacity"
-            >
-              Book a Table
-            </a>
+            <div className="h-16 w-48 bg-gray-600 rounded"></div>
+            <div className="h-16 w-32 bg-gray-600 rounded"></div>
+            <div className="h-16 w-40 bg-gray-600 rounded"></div>
+            <div className="h-16 w-48 bg-gray-600 rounded"></div>
           </div>
         </div>
       )}

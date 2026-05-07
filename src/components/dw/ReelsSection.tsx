@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import SplitText from "./SplitText";
 
 const reels = [
-  { src: "/videos/reel1.mp4", dish: "Chaat Papri", emoji: "🥘" },
-  { src: "/videos/reel2.mp4", dish: "Veg Biryani", emoji: "�" },
-  { src: "/videos/reel3.mp4", dish: "Dahi Bhalla", emoji: "🥣" },
-  { src: "/videos/reel4.mp4", dish: "Veg Seekh Kebab", emoji: "🍢" },
-  { src: "/videos/reel5.mp4", dish: "Kulfi Falooda", emoji: "🍨" },
+  { src: "/videos/reel1.mp4", dish: "", emoji: "" },
+  { src: "/videos/reel2.mp4", dish: "", emoji: "" },
+  { src: "/videos/reel3.mp4", dish: "", emoji: "" },
+  { src: "/videos/reel4.mp4", dish: "", emoji: "" },
+  { src: "/videos/reel5.mp4", dish: "", emoji: "" },
 ];
 
 const brandColors = ["#FFC300", "#FF5500", "#067E85", "#C40878", "#FFC300"];
@@ -55,30 +55,12 @@ export default function ReelsSection() {
 
   return (
     <section className="bg-dw-cream">
-      {/* Heading Section */}
+      {/* Heading Section - Placeholder */}
       <div className="px-6 pt-16 pb-8 md:px-12 md:pt-[60px] md:pb-8">
         <div className="flex flex-col items-center text-center">
-          <h2 className="font-display text-3xl font-bold text-dw-orange md:text-[3rem]">
-            <SplitText
-              text="FOOD FROM THE CAPITAL"
-              delay={0.1}
-              stagger={0.03}
-              duration={0.6}
-              from={{ opacity: 0, y: 25 }}
-              to={{ opacity: 1, y: 0 }}
-            />
-          </h2>
-          <div className="my-3 h-[2px] w-20 bg-dw-yellow opacity-0 animate-[fadeIn_0.4s_ease_0.5s_forwards]" />
-          <p className="font-display text-2xl text-dw-teal md:text-[2rem]">
-            <SplitText
-              text="राजधानी से भोजन"
-              delay={0.4}
-              stagger={0.05}
-              duration={0.5}
-              from={{ opacity: 0, y: 20 }}
-              to={{ opacity: 1, y: 0 }}
-            />
-          </p>
+          <div className="h-12 w-80 bg-gray-200 rounded mb-3"></div>
+          <div className="h-2 w-20 bg-gray-300 rounded"></div>
+          <div className="mt-3 h-8 w-48 bg-gray-200 rounded"></div>
         </div>
       </div>
 
@@ -132,13 +114,11 @@ export default function ReelsSection() {
                   className="absolute inset-0 flex flex-col items-center justify-center"
                   style={{ backgroundColor: brandColors[index] }}
                 >
-                  <span className="font-display text-6xl">{reel.emoji}</span>
-                  <span className="font-display mt-4 text-lg font-bold text-white">
-                    {reel.dish}
-                  </span>
+                  <div className="h-16 w-16 bg-white/30 rounded-full mb-4"></div>
+                  <div className="h-6 w-32 bg-white/50 rounded"></div>
                 </div>
 
-                {/* Content Overlay */}
+                {/* Content Overlay - Placeholder */}
                 <div
                   className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-5"
                   style={{
@@ -147,17 +127,10 @@ export default function ReelsSection() {
                     height: "40%",
                   }}
                 >
-                  <h3 className="font-display text-lg font-bold text-white">
-                    {reel.dish}
-                  </h3>
-                  <div className="mt-1 flex items-center gap-2">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: "#067E85" }}
-                    />
-                    <span className="font-body text-sm text-white/90">
-                      Delhi Style
-                    </span>
+                  <div className="h-6 w-32 bg-white/80 rounded mb-2"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-gray-300"></div>
+                    <div className="h-4 w-24 bg-white/70 rounded"></div>
                   </div>
                 </div>
               </div>

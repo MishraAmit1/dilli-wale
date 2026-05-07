@@ -22,28 +22,11 @@ export default function PageLoader() {
 
         {/* WHEEL */}
         <div className="dw-wheel">
-          <div className="dw-inner-rim" />
-
-          {/* 12 spokes — full 360° every 30deg */}
-          <div className="dw-spoke" style={{ transform: 'rotate(0deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(30deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(60deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(90deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(120deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(150deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(180deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(210deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(240deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(270deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(300deg)' }} />
-          <div className="dw-spoke" style={{ transform: 'rotate(330deg)' }} />
-
-          {/* Hub with heart */}
-          <div className="dw-hub">♥</div>
+          <img src="/wheels.svg" alt="Rotating Wheel" className="w-full h-full" />
         </div>
 
         {/* Brand name */}
-        <div className="loader-name">DILLI WALE</div>
+        {/* <div className="loader-name">DILLI WALE</div> */}
 
         {/* Bouncing dots */}
         <div className="loader-dots">
