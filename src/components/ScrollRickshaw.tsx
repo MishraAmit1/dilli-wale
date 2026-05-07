@@ -27,12 +27,8 @@ export default function ScrollRickshaw() {
     setTimeout(() => {
       const pinkSection = document.querySelector('section[class*="bg-[#c40878]"], section.bg-\\[\\#c40878\\]') as HTMLElement
       const blueSection = document.querySelector('section[class*="bg-[#5BC8E8]"], section.bg-\\[\\#5BC8E8\\]') as HTMLElement
-      const ambienceSection = document.querySelector('section[class*="bg-[#FFC300"]') as HTMLElement
-
-      // Footer ko multiple ways se dhoondte hain
-      const footer = document.querySelector('footer') ||
-        document.querySelector('[class*="footer"]') ||
-        document.querySelector('.footer') as HTMLElement
+      const ambienceSection = document.querySelector('section[class*="bg-[#FFC300]"]') as HTMLElement
+      const footer = document.querySelector('footer') as HTMLElement
 
       if (!pinkSection || !blueSection) {
         console.warn('Sections not found - retrying...', { pinkSection, blueSection })
@@ -44,14 +40,7 @@ export default function ScrollRickshaw() {
 
       ScrollTrigger.refresh()
 
-      console.log('All sections found:', {
-        pinkSection,
-        blueSection,
-        ambienceSection,
-        footer,
-        footerFound: !!footer,
-        isMobile
-      })
+      console.log('Sections found:', { pinkSection, blueSection, ambienceSection, footer, isMobile })
 
       // 1. Initial setup - start at hero position
       gsap.set(el, {
@@ -93,9 +82,9 @@ export default function ScrollRickshaw() {
 
       // 4. SECOND MOVEMENT: Pink left to Blue RIGHT (80vw)
       gsap.to(el, {
-        left: isMobile ? '70vw' : '80vw',
+        left: isMobile ? '70vw' : '80vw', // Right side
         top: '50vh',
-        scale: isMobile ? 0.8 : 1,
+        scale: isMobile ? 0.8 : 1, // SAME SIZE as pink
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: blueSection,
@@ -107,11 +96,12 @@ export default function ScrollRickshaw() {
       })
 
       // 5. THIRD MOVEMENT: Blue right to BigJharokha CENTER (inside dome arch)
+      // BigJharokha is on LEFT side of grid, so targeting ~25-30vw (not too far left)
       if (ambienceSection) {
         gsap.to(el, {
-          left: isMobile ? '30vw' : '28vw',
-          top: isMobile ? '42vh' : '45vh',
-          scale: isMobile ? 0.8 : 1,
+          left: isMobile ? '30vw' : '28vw', // Center of BigJharokha (left grid item)
+          top: isMobile ? '42vh' : '45vh', // Inside the arch/dome area
+          scale: isMobile ? 0.8 : 1, // SAME SIZE - NO shrinking
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: ambienceSection,
@@ -119,58 +109,33 @@ export default function ScrollRickshaw() {
             end: 'top center',
             scrub: isMobile ? 0.8 : 1,
             immediateRender: false,
-            onEnter: () => console.log('Ambience section entered'),
-            onLeave: () => console.log('Ambience section left'),
           }
         })
       }
 
       // 6. FOURTH MOVEMENT: Gallery to Footer LEFT (with shrinking)
-      // Footer trigger ko ambienceSection ke end se start karte hain
-      if (ambienceSection) {
-        gsap.to(el, {
-          left: isMobile ? '18vw' : '12vw',
-          top: isMobile ? '88vh' : '85vh',
-          scale: isMobile ? 0.45 : 0.55,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: ambienceSection,
-            start: 'bottom center', // Ambience section ke bottom se start
-            end: 'bottom top', // Jab ambience pura upar chala jaye
-            scrub: isMobile ? 0.8 : 1,
-            immediateRender: false,
-            onEnter: () => console.log('Moving to footer position'),
-            onUpdate: (self) => {
-              console.log('Footer animation progress:', self.progress)
-            }
-          }
-        })
-      }
-
-      // Alternative: Agar footer mil gaya ho to usse bhi trigger kar sakte hain
       if (footer) {
         gsap.to(el, {
-          left: isMobile ? '18vw' : '12vw',
-          top: isMobile ? '88vh' : '85vh',
-          scale: isMobile ? 0.45 : 0.55,
+          left: isMobile ? '18vw' : '12vw', // Footer logo position left
+          top: isMobile ? '88vh' : '85vh', // Footer area
+          scale: isMobile ? 0.45 : 0.55, // NOW shrink for footer
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: footer,
-            start: 'top 80%', // Footer jab 80% visible ho
-            end: 'top 50%',
+            start: 'top bottom',
+            end: 'top center',
             scrub: isMobile ? 0.8 : 1,
             immediateRender: false,
-            onEnter: () => console.log('Footer trigger activated'),
           }
         })
 
-        // Final pin at footer
+        // Pin at footer logo position
         ScrollTrigger.create({
           trigger: footer,
-          start: 'top 50%',
+          start: 'top center',
           end: 'bottom bottom',
           onUpdate: (self) => {
-            if (self.progress >= 0.5) {
+            if (self.progress >= 0.99) {
               gsap.set(el, {
                 left: isMobile ? '18vw' : '12vw',
                 top: isMobile ? '88vh' : '85vh',
