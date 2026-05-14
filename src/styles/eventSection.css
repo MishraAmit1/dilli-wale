@@ -1,0 +1,94 @@
+/* ── EventSection — reference: beisbol-section ── */
+
+.es-section {
+  background-color: #ffc300;
+  margin-top: -2px;
+  overflow-x: hidden;
+  padding-top: 30vw; /* space for herobg bleed from hero section */
+}
+
+@media (min-width: 900px) {
+  .es-section {
+    padding-top: 22vw;
+  }
+}
+
+/* Banner text — exact reference .text-banner */
+.es-text-banner {
+  font-size: clamp(2rem, 8vw, 10em);
+  line-height: 1.125;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Reference .text-headline */
+.es-text-headline {
+  font-size: clamp(1rem, 3vw, 2.5em);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+/* Reference .text-smallcaps */
+.es-text-smallcaps {
+  font-size: 0.875em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+}
+
+/* Navy — reference #002855 */
+.es-text-navy { color: #002855; }
+
+/* Banner vertical rhythm */
+.es-py-2-18 {
+  padding-top: 11.11vw;
+  padding-bottom: 11.11vw;
+}
+
+/* Banner text-shadow — small on mobile, full on desktop */
+.es-banner-shadow {
+  text-shadow: 0.15rem 0.15rem 0 #FD9805;
+}
+
+@media (min-width: 768px) {
+  .es-banner-shadow {
+    text-shadow: 0.5rem 0.5rem 0 #FD9805;
+  }
+}
+
+/* Logo — absolute on the section, fully controlled by GSAP */
+.es-logo-sprite {
+  position: absolute;
+  top: 26vw;
+  left: 0;
+  height: 28vw;
+  min-height: 120px;
+  max-height: 320px;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.22));
+  will-change: transform;
+}
+
+@media (min-width: 900px) {
+  .es-logo-sprite {
+    top: 18vw;
+  }
+}
+
+.es-logo-sprite img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Cards grid — 18-col */
+.es-grid-18 {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+}
+.es-col-start-2 { grid-column-start: 2; }
+.es-col-span-16 { grid-column: span 16 / span 16; }

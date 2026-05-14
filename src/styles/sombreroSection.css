@@ -1,0 +1,177 @@
+/* ── SombreroSection — reference: sombrero-section ── */
+
+.cs-section {
+  background-color: #002855; /* navy */
+  overflow: hidden;          /* kills both axes — flags + downtown cause horizontal bleed */
+  position: relative;
+}
+
+/* Food illustration — pinned to very bottom of section */
+.cs-food-bg {
+  background-image: url("/images/food-1x.png");
+  background-image: image-set(
+    url("/images/food-1x.webp") 1x,
+    url("/images/food-2x.webp") 2x
+  );
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% auto;
+}
+
+@media (min-width: 900px) {
+  .cs-food-bg {
+    background-position: bottom center;
+    background-size: 75% auto;
+  }
+}
+
+/* Banner text — exact reference .text-banner */
+.cs-banner-text {
+  font-size: clamp(2rem, 8vw, 10em);
+  line-height: 1.125;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Banner padding */
+.cs-py-2-18 {
+  padding-top: 11.11vw;
+  padding-bottom: 11.11vw;
+}
+
+/* Bottom padding — space for food illustration */
+.cs-pb {
+  padding-bottom: 65vw;
+}
+
+@media (min-width: 900px) {
+  .cs-pb {
+    padding-bottom: 38vw;
+  }
+}
+
+/* Flags outer cell — full-bleed with responsive height */
+.cs-flags-container {
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  padding-top: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .cs-flags-container {
+    padding-top: 38.88vw; /* tl:pt-7/18 */
+  }
+}
+
+/* Feature items wrapper — py only on mobile */
+.cs-features-wrap {
+  padding-top: 11.11vw;
+  padding-bottom: 11.11vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+@media (min-width: 900px) {
+  .cs-features-wrap {
+    padding-top: 0;
+    padding-bottom: 5.55vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.cs-flag-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 2rem);
+  transform-origin: top left;
+  transform: rotate(12deg);
+}
+
+.cs-flag-row--b {
+  transform-origin: top right;
+  margin-left: -2rem;
+  transform: rotate(-12deg);
+}
+
+/* Downtown background — reference .page__downtown */
+.cs-downtown {
+  background-image: url("/images/downtown-1x.png");
+  background-image: image-set(
+    url("/images/downtown-1x.png") 1x,
+    url("/images/downtown-2x.webp") 2x
+  );
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-blend-mode: soft-light;
+}
+
+/* Flavor overlays — reference .page__flavor */
+.cs-flavor {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 100%;
+  display: block;
+}
+
+.cs-flavor--spices {
+  background-image: image-set(
+    url("/images/flavor-spices-1x.webp") 1x,
+    url("/images/flavor-spices-2x.webp") 2x
+  );
+  left: 0;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.cs-flavor--smoke {
+  background-image: image-set(
+    url("/images/flavor-smoke-1x.webp") 1x,
+    url("/images/flavor-smoke-2x.webp") 2x
+  );
+  top: auto;
+  bottom: 8vw;
+  right: 14%;
+  width: 40%;
+  padding-top: 40%;
+}
+
+@media (min-width: 900px) {
+  .cs-flavor--spices {
+    width: 40%;
+    padding-top: 40%;
+  }
+}
+
+/* Feature items */
+.cs-feature-heading {
+  font-size: clamp(1.2rem, 3vw, 2.5em);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Pennant wave animation */
+/* Banner text-shadow — responsive */
+.cs-banner-shadow-pink   { text-shadow: 0.15rem 0.15rem 0 #FFFFFF; }
+.cs-banner-shadow-yellow { text-shadow: 0.15rem 0.15rem 0 #00A1B0; }
+
+@media (min-width: 768px) {
+  .cs-banner-shadow-pink   { text-shadow: 0.5rem 0.5rem 0 #FFFFFF; }
+  .cs-banner-shadow-yellow { text-shadow: 0.5rem 0.5rem 0 #00A1B0; }
+}
+
+@keyframes pennant-wave {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-12px);
+  }
+}

@@ -13,20 +13,34 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-6 py-5 md:px-12 relative z-10">
           {/* Left: Logo - Placeholder */}
           <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-32 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs font-bold">LOGO</div>
+            <div className="h-8 w-32 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs font-bold">
+              LOGO
+            </div>
           </a>
           {/* Center: Nav Links - Placeholder */}
           <div className="hidden md:flex items-center gap-8">
-            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">HOME</div>
-            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">MENU</div>
-            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">ABOUT</div>
-            <div className="h-6 w-20 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">CONTACT</div>
-            <div className="h-6 w-24 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">SERVICES</div>
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">
+              HOME
+            </div>
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">
+              MENU
+            </div>
+            <div className="h-6 w-16 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">
+              ABOUT
+            </div>
+            <div className="h-6 w-20 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">
+              CONTACT
+            </div>
+            <div className="h-6 w-24 bg-black bg-opacity-10 rounded text-amber-900 flex items-center justify-center text-xs">
+              SERVICES
+            </div>
           </div>
 
           {/* Right: CTA Button - Placeholder */}
           <div className="hidden md:block">
-            <div className="h-10 w-32 bg-black bg-opacity-10 rounded-full text-amber-900 flex items-center justify-center text-sm font-bold">ORDER NOW</div>
+            <div className="h-10 w-32 bg-black bg-opacity-10 rounded-full text-amber-900 flex items-center justify-center text-sm font-bold">
+              ORDER NOW
+            </div>
           </div>
 
           {/* Mobile: Hamburger */}
@@ -89,10 +103,10 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.2 + (index * 0.1),
+                    delay: 0.2 + index * 0.1,
                     duration: 0.5,
                     type: "spring",
-                    stiffness: 100
+                    stiffness: 100,
                   }}
                   className="h-16 w-48 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors cursor-pointer"
                 />

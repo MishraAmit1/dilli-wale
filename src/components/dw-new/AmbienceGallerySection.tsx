@@ -100,7 +100,7 @@ const BigJharokha = () => {
                         <div className="h-2.5 w-2.5 rounded-full bg-black/10" />
                     </div>
                     <div className="h-8 w-20 rounded-full border-2 border-[#1A1A1A] bg-[#FFC300]/50" />
-                </div>
+                </div>  
 
                 <div className="relative flex-1 rounded-[22px] border-2 border-[#1A1A1A] bg-black/5 p-4">
                     <div className="absolute left-[10%] right-[10%] top-4 flex justify-between">

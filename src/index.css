@@ -30,7 +30,9 @@
     @apply border-border;
   }
 
+  html,
   body {
+    overflow-x: hidden;
     @apply bg-background text-foreground font-body;
   }
 
@@ -510,15 +512,14 @@
   }
 }
 
-/* WHEEL — drops in from top then spins continuously */
+/* WHEEL — drops in from top; ring rotates independently via .dw-ring-spin */
 .dw-wheel {
   width: 140px;
   height: 140px;
   position: relative;
-  animation:
-    loader-dropin 0.7s cubic-bezier(.34, 1.56, .64, 1) 0.1s both,
-    loader-spin 1.8s linear 0.8s infinite;
+  animation: loader-dropin 0.7s cubic-bezier(.34, 1.56, .64, 1) 0.1s both;
   transform: translateY(-220px);
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
@@ -532,6 +533,13 @@
   to {
     transform: translateY(0);
   }
+}
+
+/* Only the outer teal ring rotates, around its own geometric center */
+.dw-ring-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: loader-spin 2.4s linear 0.8s infinite;
 }
 
 @keyframes loader-spin {
@@ -585,6 +593,15 @@
   height: 9px;
   border-radius: 50%;
   animation: loader-bounce 0.9s ease-in-out infinite;
+}
+
+/* ── Responsive heading text-shadows ── */
+.dw-shadow-orange { text-shadow: 0.15rem 0.15rem 0 #FD9805; }
+.dw-shadow-pink   { text-shadow: 0.15rem 0.15rem 0 #E31C79; }
+
+@media (min-width: 768px) {
+  .dw-shadow-orange { text-shadow: 0.5rem 0.5rem 0 #FD9805; }
+  .dw-shadow-pink   { text-shadow: 0.5rem 0.5rem 0 #E31C79; }
 }
 
 @media (min-width: 768px) {
@@ -647,4 +664,37 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes hero-rickshaw-in {
+  from {
+    transform: translateX(-60vw);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-text-up {
+  from {
+    transform: translateY(36px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, calc(-50% - 5px)); }
 }

@@ -1,0 +1,55 @@
+/* ── StorySection ── */
+
+.ss-section {
+  background-color: #ffc300; /* same yellow as EventSection / Hero */
+}
+
+/* Heading — exact same as es-text-banner */
+.ss-heading {
+  font-size: clamp(2.5rem, 8vw, 10em);
+  line-height: 1.125;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Body paragraphs */
+.ss-body {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.8;
+  color: #002855;
+}
+
+/* CTA button — transparent, white border, fills on hover */
+.ss-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.75rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: transparent;
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.25s ease;
+  will-change: transform;
+}
+
+.ss-btn:hover {
+  background-color: #ffffff;
+  color: #002855;
+  transform: translateY(-3px);
+}
+
+/* Arrow inside button */
+.ss-btn__arrow {
+  transition: transform 0.25s ease;
+}
+
+.ss-btn:hover .ss-btn__arrow {
+  transform: translateX(4px);
+}
