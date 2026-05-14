@@ -3,14 +3,7 @@
 .es-section {
   background-color: #ffc300;
   margin-top: -2px;
-  overflow-x: hidden;
-  padding-top: 30vw; /* space for herobg bleed from hero section */
-}
-
-@media (min-width: 900px) {
-  .es-section {
-    padding-top: 22vw;
-  }
+  overflow-x: hidden; /* kills horizontal scrollbar from w-screen banner */
 }
 
 /* Banner text — exact reference .text-banner */
@@ -60,7 +53,7 @@
 /* Logo — absolute on the section, fully controlled by GSAP */
 .es-logo-sprite {
   position: absolute;
-  top: 26vw;
+  top: 4vw;
   left: 0;
   height: 28vw;
   min-height: 120px;
@@ -71,12 +64,6 @@
   pointer-events: none;
   filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.22));
   will-change: transform;
-}
-
-@media (min-width: 900px) {
-  .es-logo-sprite {
-    top: 18vw;
-  }
 }
 
 .es-logo-sprite img {

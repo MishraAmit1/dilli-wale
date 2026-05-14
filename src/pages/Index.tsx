@@ -13,6 +13,7 @@ const Index = () => (
   <main className="min-h-screen bg-dw-cream font-body text-dw-dark animate-content-fade">
     <Navbar />
     <HeroSection />
+    {/* <PinkMandalaSection /> */}
     <EventSection />
     <StorySection />
     <SombreroSection />

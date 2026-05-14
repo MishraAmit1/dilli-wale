@@ -89,7 +89,7 @@ export default function HeroSection() {
             }}
             className="hover:-translate-y-0.5"
           >
-            Get Tickets
+            Order Now
           </a>
 
           <a
@@ -121,7 +121,7 @@ export default function HeroSection() {
               (e.currentTarget as HTMLAnchorElement).style.color = "#002855";
             }}
           >
-            Know More
+            View Menu
           </a>
         </div>
       </div>
